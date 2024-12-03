@@ -1,0 +1,23 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SouvenirShop.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SouvenirShop.Pages.LoginPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="LoginPage" Background="SlateGray">
+
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
+        <TextBlock HorizontalAlignment="Left" Margin="53,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="48"><Run Text="ᨒ"/><Run Text=" Лавка Алтая"/></TextBlock>
+        <Label Content="" Margin="39,219,1478,0" Width="403" Height="76" Foreground="White" FontSize="48" FontFamily="Cascadia Mono SemiBold" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginTxt" Margin="0,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="40" />
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="848,447,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="848,537,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
+        <ui:Button x:Name="LoginBtn" Content="Войти" HorizontalAlignment="Center" Margin="0,619,0,0" VerticalAlignment="Top" Width="172" Click="LoginBtn_Click" Background="#410048F7"/>
+        <ui:Button x:Name="RegBtn" Content="Зарегестрироваться" Margin="0,660,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="172" Background="#410048F7" Click="RegBtn_Click"/>
+        <ui:PasswordBox x:Name="PassTxt" Margin="835,565,835,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+    </Grid>
+</Page>

@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Souvenir_shopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DeliveryPlans">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SouvenirID" Type="int" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="SouvenirID" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="TotalCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PaymentType" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Souvenirs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SouvenirsKinds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SouvenirID" Type="int" />
+          <Property Name="Amount" Type="int" />
+        </EntityType>
+        <Association Name="FK_DeliveryPlans_Souvenirs">
+          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="0..1" />
+          <End Role="DeliveryPlans" Type="Self.DeliveryPlans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenirs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DeliveryPlans">
+              <PropertyRef Name="SouvenirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Souvenirs_SouvenirsKinds">
+          <End Role="SouvenirsKinds" Type="Self.SouvenirsKinds" Multiplicity="0..1" />
+          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SouvenirsKinds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Souvenirs">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Souvenirs">
+          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenirs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="SouvenirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Souvenir_shopModelContainer">
+          <EntitySet Name="DeliveryPlans" EntityType="Self.DeliveryPlans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Souvenirs" EntityType="Self.Souvenirs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SouvenirsKinds" EntityType="Self.SouvenirsKinds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DeliveryPlans_Souvenirs" Association="Self.FK_DeliveryPlans_Souvenirs">
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+            <End Role="DeliveryPlans" EntitySet="DeliveryPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_PaymentTypes" Association="Self.FK_Orders_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Souvenirs_SouvenirsKinds" Association="Self.FK_Souvenirs_SouvenirsKinds">
+            <End Role="SouvenirsKinds" EntitySet="SouvenirsKinds" />
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Souvenirs" Association="Self.FK_Warehouse_Souvenirs">
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Souvenir_shopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DeliveryPlan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SouvenirID" Type="Int32" />
+          <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Souvenir" Relationship="Self.FK_DeliveryPlans_Souvenirs" FromRole="DeliveryPlans" ToRole="Souvenirs" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="SouvenirID" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PaymentType" Type="Int32" />
+          <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_OrderStatus" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="PaymentType1" Relationship="Self.FK_Orders_PaymentTypes" FromRole="Orders" ToRole="PaymentTypes" />
+          <NavigationProperty Name="User" Relationship="Souvenir_shopModel.FK_Orders_Users" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <EntityType Name="OrderStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderStatus" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_PaymentTypes" FromRole="PaymentTypes" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Role" FromRole="Role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Souvenir">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DeliveryPlans" Relationship="Self.FK_DeliveryPlans_Souvenirs" FromRole="Souvenirs" ToRole="DeliveryPlans" />
+          <NavigationProperty Name="SouvenirsKind" Relationship="Self.FK_Souvenirs_SouvenirsKinds" FromRole="Souvenirs" ToRole="SouvenirsKinds" />
+          <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Souvenirs" FromRole="Souvenirs" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="SouvenirsKind">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Souvenirs" Relationship="Self.FK_Souvenirs_SouvenirsKinds" FromRole="SouvenirsKinds" ToRole="Souvenirs" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" />
+          <NavigationProperty Name="Role1" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+          <NavigationProperty Name="Orders" Relationship="Souvenir_shopModel.FK_Orders_Users" FromRole="User" ToRole="Order" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SouvenirID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <NavigationProperty Name="Souvenir" Relationship="Self.FK_Warehouse_Souvenirs" FromRole="Warehouse" ToRole="Souvenirs" />
+        </EntityType>
+        <Association Name="FK_DeliveryPlans_Souvenirs">
+          <End Role="Souvenirs" Type="Self.Souvenir" Multiplicity="0..1" />
+          <End Role="DeliveryPlans" Type="Self.DeliveryPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenirs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DeliveryPlans">
+              <PropertyRef Name="SouvenirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_PaymentTypes">
+          <End Role="PaymentTypes" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Souvenirs_SouvenirsKinds">
+          <End Role="SouvenirsKinds" Type="Self.SouvenirsKind" Multiplicity="0..1" />
+          <End Role="Souvenirs" Type="Self.Souvenir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SouvenirsKinds">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Souvenirs">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Souvenirs">
+          <End Role="Souvenirs" Type="Self.Souvenir" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenirs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="SouvenirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Souvenir_shopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DeliveryPlans" EntityType="Self.DeliveryPlan" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Souvenirs" EntityType="Self.Souvenir" />
+          <EntitySet Name="SouvenirsKinds" EntityType="Self.SouvenirsKind" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_DeliveryPlans_Souvenirs" Association="Self.FK_DeliveryPlans_Souvenirs">
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+            <End Role="DeliveryPlans" EntitySet="DeliveryPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_PaymentTypes" Association="Self.FK_Orders_PaymentTypes">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Souvenirs_SouvenirsKinds" Association="Self.FK_Souvenirs_SouvenirsKinds">
+            <End Role="SouvenirsKinds" EntitySet="SouvenirsKinds" />
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Souvenirs" Association="Self.FK_Warehouse_Souvenirs">
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+            <End Role="Warehouse" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="Souvenir_shopModel.FK_Orders_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Orders_Users">
+          <End Type="Souvenir_shopModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="Souvenir_shopModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Souvenir_shopModelContainer" CdmEntityContainer="Souvenir_shopEntities">
+          <EntitySetMapping Name="DeliveryPlans">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.DeliveryPlan">
+              <MappingFragment StoreEntitySet="DeliveryPlans">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SouvenirID" ColumnName="SouvenirID" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="SouvenirID" ColumnName="SouvenirID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Souvenirs">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.Souvenir">
+              <MappingFragment StoreEntitySet="Souvenirs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SouvenirsKinds">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.SouvenirsKind">
+              <MappingFragment StoreEntitySet="SouvenirsKinds">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="Souvenir_shopModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SouvenirID" ColumnName="SouvenirID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
