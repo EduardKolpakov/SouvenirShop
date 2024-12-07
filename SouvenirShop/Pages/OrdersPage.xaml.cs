@@ -47,5 +47,18 @@ namespace SouvenirShop.Pages
                 refresh();
             }
         }
+        private void BtnWarehouseClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WareHousePage(us));
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage(us));
+        }
+        private void BtnSouvenirs_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Souvenirs(us));
+        }
     }
 }

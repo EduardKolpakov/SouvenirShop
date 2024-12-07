@@ -16,7 +16,7 @@
             <Run FontSize="22" Text="Лавка Алтая."/>
             <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
         </ui:TextBlock>
-        <Expander HorizontalAlignment="Left" Height="200" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
+        <Expander HorizontalAlignment="Left" Height="300" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
             <Expander.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Source="/Images/lines.png" Width="40" Height="40" Margin="5,0,10,0" />
@@ -33,7 +33,12 @@
                         <Image Source="/Images/shop.png" Width="50" Height="40" />
                     </StackPanel>
                 </Button>
-
+                <Button x:Name="BtnOrders" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnOrders_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/order.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+                
             </StackPanel>
         </Expander>
         <ListView d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="LvSouv"  Margin="143,300,143,50" Background="Transparent" MaxWidth="1634" SelectionChanged="LvSouv_SelectionChanged">

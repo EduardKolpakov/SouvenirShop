@@ -60,5 +60,9 @@ namespace SouvenirShop.Pages
         {
             NavigationService.Navigate(new WareHousePage(us));
         }
+        private void BtnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage(us));
+        }
     }
 }

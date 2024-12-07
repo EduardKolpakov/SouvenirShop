@@ -17,6 +17,31 @@
             <Run FontSize="22" Text="Лавка Алтая."/>
             <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
         </ui:TextBlock>
+        <Expander HorizontalAlignment="Left" Height="300" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Images/lines.png" Width="40" Height="40" Margin="5,0,10,0" />
+                </StackPanel>
+            </Expander.Header>
+            <StackPanel HorizontalAlignment="Center">
+
+                <Button x:Name="BtnHome" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnHome_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/home.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnWarehouses" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnWarehouses_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/shelf.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnOrders" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnOrders_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/order.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Expander>
         <TextBlock HorizontalAlignment="Center" Margin="0,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="36"><Run Language="ru-ru" Text="Ваши заказы"/></TextBlock>
         <ListView d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="LvSouv"  Margin="143,300,143,50" Background="Transparent" MaxWidth="1634">
             <ListView.Resources>
