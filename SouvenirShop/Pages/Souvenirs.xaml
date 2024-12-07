@@ -13,7 +13,7 @@
 
         <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
         <TextBlock HorizontalAlignment="Left" Margin="53,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="48"><Run Text="ᨒ"/><Run Text=" Лавка Алтая"/></TextBlock>
-        <Expander HorizontalAlignment="Left" Height="200" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
+        <Expander HorizontalAlignment="Left" Height="300" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
             <Expander.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Source="/Images/lines.png" Width="40" Height="40" Margin="5,0,10,0" />
@@ -29,6 +29,11 @@
                 <Button x:Name="BtnWarehouse" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnWarehouseClick">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
                         <Image Source="/Images/shelf.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnOrders" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnOrders_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/order.png" Width="50" Height="40" />
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -56,7 +61,7 @@
                                 <TextBlock Text="{Binding SouvenirsKind.Name}" Foreground="White" FontSize="14"/>
                                 <TextBlock Text="{Binding Cost, StringFormat=Стоимость: {0:C}}" Language="ru-RU" Foreground="#FF0056FF" FontWeight="Bold" FontSize="14"/>
                                 <TextBlock Text="{Binding Sale, StringFormat=Скидка: {0:F1}%}" Foreground="#FFFF4141" FontWeight="Bold" FontSize="14"/>
-                                <Button x:Name="BtnPurchase" Content="Купить" Background="Black" Foreground="White" Margin="150, 7, 0, 0"/>
+                                <Button x:Name="BtnPurchase" Content="Купить" Background="Black" Foreground="White" Margin="150, 7, 0, 0" Click="BtnPurchase_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

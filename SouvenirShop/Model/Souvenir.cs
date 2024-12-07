@@ -19,6 +19,7 @@ namespace SouvenirShop.Model
         {
             this.DeliveryPlans = new HashSet<DeliveryPlan>();
             this.Warehouses = new HashSet<Warehouse>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int ID { get; set; }
@@ -33,5 +34,7 @@ namespace SouvenirShop.Model
         public virtual SouvenirsKind SouvenirsKind { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Warehouse> Warehouses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

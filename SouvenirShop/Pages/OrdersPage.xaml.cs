@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SouvenirShop.Model;
 
 namespace SouvenirShop.Pages
 {
@@ -20,9 +21,31 @@ namespace SouvenirShop.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
-        public OrdersPage()
+        User us;
+        public OrdersPage(User us)
         {
             InitializeComponent();
+            this.us = us;
+            LvSouv.ItemsSource = ConnectionClass.connect.Orders.Where(z => z.ClientID == us.ID).ToList();
+        }
+
+        private void refresh()
+        {
+            LvSouv.ItemsSource = null; 
+            LvSouv.ItemsSource = ConnectionClass.connect.Orders.Where(z => z.ClientID == us.ID).ToList();
+        }
+
+        private void BtnPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            var o = (sender as Button).DataContext as Order;
+            if (MessageBox.Show("Вы уверены, что хотите отменить заказ?", "Отмена", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                o.Status = 4;
+                Warehouse wh = ConnectionClass.connect.Warehouses.Where(z => z.SouvenirID == o.SouvenirID).FirstOrDefault();
+                wh.Amount += o.Amount;
+                ConnectionClass.connect.SaveChanges();
+                refresh();
+            }
         }
     }
 }

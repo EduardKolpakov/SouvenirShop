@@ -26,5 +26,6 @@ namespace SouvenirShop.Model
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual PaymentType PaymentType1 { get; set; }
         public virtual User User { get; set; }
+        public virtual Souvenir Souvenir { get; set; }
     }
 }

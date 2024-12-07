@@ -113,5 +113,16 @@ namespace SouvenirShop.Pages
         {
             NavigationService.Navigate(new WareHousePage(us));
         }
+
+        private void BtnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage(us));
+        }
+
+        private void BtnPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            Souvenir sv = (sender as Button).DataContext as Souvenir;
+            NavigationService.Navigate(new AddOrderPage(us, sv));
+        }
     }
 }

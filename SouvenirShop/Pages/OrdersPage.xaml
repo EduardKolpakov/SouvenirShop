@@ -18,5 +18,34 @@
             <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
         </ui:TextBlock>
         <TextBlock HorizontalAlignment="Center" Margin="0,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="36"><Run Language="ru-ru" Text="Ваши заказы"/></TextBlock>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="LvSouv"  Margin="143,300,143,50" Background="Transparent" MaxWidth="1634">
+            <ListView.Resources>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" CornerRadius="8" Width="400" Height="150">
+                        <StackPanel Orientation="Horizontal" Margin="8" Background="#FF252C33">
+                            <Image Source="{Binding Souvenir.Image}" Width="80" Height="80" Stretch="UniformToFill" Margin="10,0,10,0" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding ID, StringFormat=Заказ #{0}}" FontWeight="Bold" FontSize="16" Foreground="White" Margin="0, 5, 0, 0"/>
+                                <TextBlock Text="{Binding Souvenir.Name}" Foreground="White" FontSize="14"/>
+                                <TextBlock Text="{Binding TotalCost, StringFormat=Стоимость: {0:C}}" Language="ru-RU" Foreground="#FF0056FF" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="{Binding OrderStatu.Status, StringFormat=Статус: {0:F1}}" Foreground="#FFFF4141" FontWeight="Bold" FontSize="14"/>
+                                <Button x:Name="BtnPurchase" Content="Отменить" Background="#66FF3333" Foreground="White" Margin="150, 7, 0, 0" Click="BtnPurchase_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
