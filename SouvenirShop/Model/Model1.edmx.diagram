@@ -21,6 +21,7 @@
         <AssociationConnector Association="Souvenir_shopModel.FK_Souvenirs_SouvenirsKinds" ManuallyRouted="false" />
         <AssociationConnector Association="Souvenir_shopModel.FK_Warehouse_Souvenirs" ManuallyRouted="false" />
         <AssociationConnector Association="Souvenir_shopModel.FK_Orders_Users" />
+        <AssociationConnector Association="Souvenir_shopModel.FK_Orders_Souvenirs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

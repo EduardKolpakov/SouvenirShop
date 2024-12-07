@@ -123,6 +123,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Orders_Souvenirs">
+          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenirs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="SouvenirID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Orders_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -195,6 +207,10 @@
             <End Role="PaymentTypes" EntitySet="PaymentTypes" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Souvenirs" Association="Self.FK_Orders_Souvenirs">
+            <End Role="Souvenirs" EntitySet="Souvenirs" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Orders" EntitySet="Orders" />
@@ -241,6 +257,7 @@
           <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_OrderStatus" FromRole="Orders" ToRole="OrderStatus" />
           <NavigationProperty Name="PaymentType1" Relationship="Self.FK_Orders_PaymentTypes" FromRole="Orders" ToRole="PaymentTypes" />
           <NavigationProperty Name="User" Relationship="Souvenir_shopModel.FK_Orders_Users" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="Souvenir" Relationship="Souvenir_shopModel.FK_Orders_Souvenirs" FromRole="Order" ToRole="Souvenir" />
         </EntityType>
         <EntityType Name="OrderStatu">
           <Key>
@@ -279,6 +296,7 @@
           <NavigationProperty Name="SouvenirsKind" Relationship="Self.FK_Souvenirs_SouvenirsKinds" FromRole="Souvenirs" ToRole="SouvenirsKinds" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Souvenirs" FromRole="Souvenirs" ToRole="Warehouse" />
           <Property Name="Sale" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Souvenir_shopModel.FK_Orders_Souvenirs" FromRole="Souvenir" ToRole="Order" />
         </EntityType>
         <EntityType Name="SouvenirsKind">
           <Key>
@@ -422,6 +440,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Orders_Souvenirs" Association="Souvenir_shopModel.FK_Orders_Souvenirs">
+            <End Role="Souvenir" EntitySet="Souvenirs" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Orders_Users">
           <End Type="Souvenir_shopModel.User" Role="User" Multiplicity="0..1" />
@@ -432,6 +454,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Souvenirs">
+          <End Type="Souvenir_shopModel.Souvenir" Role="Souvenir" Multiplicity="0..1" />
+          <End Type="Souvenir_shopModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souvenir">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="SouvenirID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
