@@ -228,6 +228,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scriptdb\souvenirka.sql" />
     <Resource Include="Images\lines.png" />
     <Resource Include="Images\shop.png" />
     <Resource Include="Images\home.png" />
