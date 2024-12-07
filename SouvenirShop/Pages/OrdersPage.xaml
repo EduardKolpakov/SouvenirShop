@@ -1,0 +1,22 @@
+﻿<Page x:Class="SouvenirShop.Pages.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SouvenirShop.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="OrdersPage" Background="SlateGray">
+
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
+        <TextBlock HorizontalAlignment="Left" Margin="53,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="48"><Run Text="ᨒ"/><Run Text=" Лавка Алтая"/></TextBlock>
+        <ui:TextBlock HorizontalAlignment="Center" Margin="0,1044,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Cascadia Mono SemiBold">
+            <Run FontSize="22" Text="© "/>
+            <Run FontSize="22" Text="Лавка Алтая."/>
+            <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
+        </ui:TextBlock>
+        <TextBlock HorizontalAlignment="Center" Margin="0,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="36"><Run Language="ru-ru" Text="Ваши заказы"/></TextBlock>
+    </Grid>
+</Page>

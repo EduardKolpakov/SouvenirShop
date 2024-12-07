@@ -57,6 +57,7 @@
           <Property Name="Type" Type="int" />
           <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Sale" Type="int" />
         </EntityType>
         <EntityType Name="SouvenirsKinds">
           <Key>
@@ -82,7 +83,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SouvenirID" Type="int" />
           <Property Name="Amount" Type="int" />
         </EntityType>
@@ -159,7 +160,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Warehouse_Souvenirs">
-          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="0..1" />
+          <End Role="Souvenirs" Type="Self.Souvenirs" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Souvenirs">
@@ -275,6 +278,7 @@
           <NavigationProperty Name="DeliveryPlans" Relationship="Self.FK_DeliveryPlans_Souvenirs" FromRole="Souvenirs" ToRole="DeliveryPlans" />
           <NavigationProperty Name="SouvenirsKind" Relationship="Self.FK_Souvenirs_SouvenirsKinds" FromRole="Souvenirs" ToRole="SouvenirsKinds" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouse_Souvenirs" FromRole="Souvenirs" ToRole="Warehouse" />
+          <Property Name="Sale" Type="Int32" />
         </EntityType>
         <EntityType Name="SouvenirsKind">
           <Key>
@@ -488,6 +492,7 @@
           <EntitySetMapping Name="Souvenirs">
             <EntityTypeMapping TypeName="Souvenir_shopModel.Souvenir">
               <MappingFragment StoreEntitySet="Souvenirs">
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />

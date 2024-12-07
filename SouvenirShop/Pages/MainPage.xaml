@@ -10,10 +10,14 @@
       Title="MainPage" Background = "SlateGray">
 
     <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="107*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33" Grid.RowSpan="2"/>
         <TextBlock HorizontalAlignment="Left" Margin="53,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="48"><Run Text="ᨒ"/><Run Text=" Лавка Алтая"/></TextBlock>
-        <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="15" HorizontalAlignment="Center" Margin="0,249,0,431" MinWidth="150" Background="#FFCCCCCC">
-            <Image x:Name="UsImage" MaxHeight="400" MinHeight="250" Width="500">
+        <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="15" HorizontalAlignment="Left" Margin="182,90,0,473" MinWidth="150" Background="#FFCCCCCC" Grid.Row="1">
+            <Image x:Name="UsImage" MaxHeight="400" MinHeight="250" Width="500" Stretch="UniformToFill">
                 <Image.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -21,21 +25,39 @@
                 </Image.Resources>
             </Image>
         </Border>
-        <Expander HorizontalAlignment="Left" Height="200" Margin="53,222,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7">
+        <Expander HorizontalAlignment="Left" Height="200" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
             <Expander.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image Source="/Images/lines.png" Width="40" Height="40" Margin="5,0,10,0" />
                 </StackPanel>
             </Expander.Header>
             <StackPanel HorizontalAlignment="Center">
-                
-                <Button x:Name="BtnSouvenirs" Visibility="Visible"  Background="Gray" Width="50">
+
+                <Button x:Name="BtnSouvenirs" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnSouvenirs_Click">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
-                        <Image Source="/Images/lines.png" Width="20" Height="20" />
+                        <Image Source="/Images/shop.png" Width="50" Height="40" />
                     </StackPanel>
                 </Button>
-                
+                <Button x:Name="BtnWarehouses" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnWarehouses_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/shelf.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Expander>
+        <TextBlock HorizontalAlignment="Left" Margin="728,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Cascadia Mono SemiBold" Foreground="White" Text="Имя пользователя" Grid.Row="1"/>
+        <TextBox x:Name="UserNameTxt" Margin="728,132,992,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Text="{Binding Username}" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="728,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Cascadia Mono SemiBold" Foreground="White" Grid.Row="1"><Run Language="ru-ru" Text="Возраст"/></TextBlock>
+        <TextBox x:Name="AgeTxt" Margin="728,208,992,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Text="{Binding Age}" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="728,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Cascadia Mono SemiBold" Foreground="White" Grid.Row="1"><Run Language="ru-ru" Text="Пол"/></TextBlock>
+        <TextBox x:Name="GenderTxt" Margin="728,282,992,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Text="{Binding Gender}" Grid.Row="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="728,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontFamily="Cascadia Mono SemiBold" Foreground="White" Grid.Row="1"><Run Language="ru-ru" Text="Роль"/></TextBlock>
+        <TextBox x:Name="RoleTxt" Margin="728,360,992,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Text="{Binding Role1.Role1}" Grid.Row="1"/>
+        <ui:Button x:Name="EditBtn" Content="Редактировать профиль" Margin="322,524,0,0" Grid.Row="1" VerticalAlignment="Top" Width="224" Background="#410048F7" Click="EditBtn_Click"/>
+        <ui:TextBlock HorizontalAlignment="Center" Margin="0,1044,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Cascadia Mono SemiBold">
+            <Run FontSize="22" Text="© "/>
+            <Run FontSize="22" Text="Лавка Алтая."/>
+            <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
+        </ui:TextBlock>
     </Grid>
 </Page>

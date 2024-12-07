@@ -19,12 +19,12 @@ using System.Windows.Shapes;
 namespace SouvenirShop.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterPage.xaml
+    /// Логика взаимодействия для ProfileEdit.xaml
     /// </summary>
-    public partial class RegisterPage : Page
+    public partial class ProfileEdit : Page
     {
-        User us = new User();
-        public RegisterPage()
+        User us;
+        public ProfileEdit(User us1)
         {
             InitializeComponent();
             GenderSel.Items.Add("Мужской");
@@ -32,11 +32,26 @@ namespace SouvenirShop.Pages
             RoleSel.Items.Add("Владелец");
             RoleSel.Items.Add("Админ");
             RoleSel.Items.Add("Клиент");
+            us = us1;
+            this.DataContext = us;
+            setImage();
+            GenderSel.SelectedItem = us.Gender;
+            RoleSel.SelectedIndex = Convert.ToInt32(us.Role);
+        }
+
+        public void setImage()
+        {
+            MemoryStream byteStream = new MemoryStream(us.Photo);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = byteStream;
+            image.EndInit();
+            UsImage.Source = image;
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы уверены, что хотите отменить регистрацию?", "Отмена регистрации", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Вы уверены, что хотите отменить редактирование?", "Отмена редактирования", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 NavigationService.GoBack();
             }
@@ -73,7 +88,7 @@ namespace SouvenirShop.Pages
                     MessageBox.Show("Введите логин!");
                     return;
                 }
-                if (String.IsNullOrEmpty(PasTxt.Text))
+                if (String.IsNullOrEmpty(PasTxt.Password))
                 {
                     MessageBox.Show("Введите пароль!");
                     return;
@@ -120,10 +135,9 @@ namespace SouvenirShop.Pages
                 us.Age = Convert.ToInt32(AgeTxt.Text);
                 us.Gender = GenderSel.SelectedValue.ToString();
                 us.Role = RoleSel.SelectedIndex + 1;
-                ConnectionClass.connect.Users.Add(us);
                 ConnectionClass.connect.SaveChanges();
-                MessageBox.Show($"Пользователь {us.Username} успешно зарегистрирован!");
-                NavigationService.GoBack();
+                MessageBox.Show($"Данные пользователя {us.Username} успешно сохранены!");
+                NavigationService.Navigate(new MainPage(us));
                 return;
             }
         }
@@ -132,5 +146,6 @@ namespace SouvenirShop.Pages
         {
             e.Handled = !char.IsDigit(e.Text, 0);
         }
+
     }
 }

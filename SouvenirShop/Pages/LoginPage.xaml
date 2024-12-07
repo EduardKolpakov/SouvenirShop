@@ -19,5 +19,10 @@
         <ui:Button x:Name="LoginBtn" Content="Войти" HorizontalAlignment="Center" Margin="0,619,0,0" VerticalAlignment="Top" Width="172" Click="LoginBtn_Click" Background="#410048F7"/>
         <ui:Button x:Name="RegBtn" Content="Зарегестрироваться" Margin="0,660,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="172" Background="#410048F7" Click="RegBtn_Click"/>
         <ui:PasswordBox x:Name="PassTxt" Margin="835,565,835,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+        <ui:TextBlock HorizontalAlignment="Center" Margin="0,1044,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Cascadia Mono SemiBold">
+            <Run FontSize="22" Text="© "/>
+            <Run FontSize="22" Text="Лавка Алтая."/>
+            <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
+        </ui:TextBlock>
     </Grid>
 </Page>

@@ -31,7 +31,7 @@ namespace SouvenirShop.Pages
             while (true)
             {
                 string log = LoginTxt.Text;
-                string pas = PassTxt.Text;
+                string pas = PassTxt.Password;
                 if (string.IsNullOrEmpty(log))
                 {
                     MessageBox.Show("Введите логин!");
@@ -46,7 +46,7 @@ namespace SouvenirShop.Pages
                 if (u != null)
                 {
                     MessageBox.Show("Добро пожаловать!");
-                    NavigationService.Navigate(new MainPage());
+                    NavigationService.Navigate(new MainPage(u));
                     return;
                 }
                 else

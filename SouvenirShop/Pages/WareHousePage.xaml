@@ -1,0 +1,72 @@
+﻿<Page x:Class="SouvenirShop.Pages.WareHousePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SouvenirShop.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="WareHousePage" Background="SlateGray">
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
+        <TextBlock HorizontalAlignment="Left" Margin="53,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontFamily="Cascadia Mono SemiBold" FontSize="48"><Run Text="ᨒ"/><Run Text=" Лавка Алтая"/></TextBlock>
+        <ui:TextBlock HorizontalAlignment="Center" Margin="0,1044,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Cascadia Mono SemiBold">
+            <Run FontSize="22" Text="© "/>
+            <Run FontSize="22" Text="Лавка Алтая."/>
+            <Run FontSize="22" Language="ru-ru" Text=" Права получу в марте"/>
+        </ui:TextBlock>
+        <Expander HorizontalAlignment="Left" Height="200" Margin="1702,48,0,0" VerticalAlignment="Top" Width="150" Background="#410048F7" Grid.RowSpan="2">
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="/Images/lines.png" Width="40" Height="40" Margin="5,0,10,0" />
+                </StackPanel>
+            </Expander.Header>
+            <StackPanel HorizontalAlignment="Center">
+                <Button x:Name="BtnHome" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnHome_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/home.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSouvenirs" Visibility="Visible"  Background="#BF0036B9" Width="60" Click="BtnSouvenirs_Click">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="center">
+                        <Image Source="/Images/shop.png" Width="50" Height="40" />
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </Expander>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="LvSouv"  Margin="143,300,143,50" Background="Transparent" MaxWidth="1634" SelectionChanged="LvSouv_SelectionChanged">
+            <ListView.Resources>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" CornerRadius="8" Width="400" Height="170">
+                        <StackPanel Orientation="Horizontal" Margin="8" Background="#FF252C33">
+                            <Image Source="{Binding Souvenir.Image}" Width="80" Height="80" Stretch="UniformToFill" Margin="10,0,10,0" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Souvenir.Name}" FontWeight="Bold" FontSize="16" Foreground="White" Margin="0, 5, 0, 0"/>
+                                <TextBlock Text="{Binding Souvenir.SouvenirsKind.Name}" Foreground="White" FontSize="14"/>
+                                <TextBlock Text="{Binding Souvenir.Cost, StringFormat=Стоимость: {0:C}}" Language="ru-RU" Foreground="#FF0056FF" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="{Binding Souvenir.Sale, StringFormat=Скидка: {0:F1}%}" Foreground="#FFFF4141" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="{Binding Amount, StringFormat=Количество на складе: {0}}" Language="ru-RU" Foreground="White" FontWeight="Bold" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ui:Button x:Name="BtnEdit" Content="Изменить количество" Height="38" Margin="0,224,0,0" VerticalAlignment="Top" Width="200" HorizontalAlignment="Center" Click="BtnEdit_Click"/>
+        <ui:TextBox x:Name="AmountTxt" Margin="1123,224,582,0" TextWrapping="Wrap" Text="{Binding Warehoueses.Amount}" VerticalAlignment="Top" Height="38" PreviewTextInput="AmountTxt_PreviewTextInput"/>
+    </Grid>
+</Page>

@@ -26,6 +26,7 @@ namespace SouvenirShop.Model
         public Nullable<int> Type { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public byte[] Image { get; set; }
+        public Nullable<int> Sale { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryPlan> DeliveryPlans { get; set; }

@@ -1,13 +1,13 @@
-﻿<Page
+﻿<Page x:Class="SouvenirShop.Pages.ProfileEdit"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:SouvenirShop.Pages"
-      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="SouvenirShop.Pages.RegisterPage"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="RegisterPage" Background="SlateGray">
+      Title="ProfileEdit" Background = "SlateGray">
 
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="152" Stroke="Black" VerticalAlignment="Top" Width="1920" Fill="#FF252C33"/>
@@ -22,20 +22,20 @@
             </Image>
         </Border>
         <ui:Button x:Name="BtnImage" Content="Добавить фото" Margin="0,670,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="138" Background="#410048F7" Click="BtnImage_Click"/>
-        <ui:TextBox x:Name="LogTxt" Margin="353,297,1342,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ui:TextBox x:Name="UserNameTxt" Margin="353,486,1342,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ui:TextBox x:Name="LogTxt" Text="{Binding Login}" Margin="353,297,1342,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ui:TextBox x:Name="UserNameTxt" Text="{Binding Username}" Margin="353,486,1342,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="353,269,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
         <Label Content="Пароль" HorizontalAlignment="Left" Margin="353,356,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
         <Label Content="Имя пользователя" HorizontalAlignment="Left" Margin="353,458,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-        <ui:NumberBox x:Name="AgeTxt" HorizontalAlignment="Left" Margin="1324,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="36" PreviewTextInput="AgeTxt_PreviewTextInput"/>
+        <ui:NumberBox x:Name="AgeTxt" Text="{Binding Age}" HorizontalAlignment="Left" Margin="1324,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="36" PreviewTextInput="AgeTxt_PreviewTextInput"/>
         <Label Content="Возраст" HorizontalAlignment="Left" Margin="1324,269,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
         <Label Content="Пол" HorizontalAlignment="Left" Margin="1324,343,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
         <Label Content="Роль" HorizontalAlignment="Left" Margin="1324,458,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
-        <ui:PasswordBox x:Name="PasTxt" Margin="353,384,1342,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
+        <ui:PasswordBox x:Name="PasTxt" Text="{Binding Password}" Margin="353,384,1342,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225"/>
         <ComboBox x:Name="GenderSel" Margin="1324,382,372,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="RoleSel" Margin="1324,485,372,0" VerticalAlignment="Top"/>
         <Button x:Name="BackBtn" Content="Назад" Margin="1686,60,0,0" VerticalAlignment="Top" Width="125" Height="32" Background="#66FF3333" Click="BackBtn_Click"/>
-        <ui:Button x:Name="RegBtn" Content="Зарегистрироваться" Margin="0,760,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Background="#410048F7" Click="RegBtn_Click"/>
+        <ui:Button x:Name="RegBtn" Content="Сохранить" Margin="0,760,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="172" Background="#410048F7" Click="RegBtn_Click"/>
         <ui:TextBlock HorizontalAlignment="Center" Margin="0,1044,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" FontFamily="Cascadia Mono SemiBold">
             <Run FontSize="22" Text="© "/>
             <Run FontSize="22" Text="Лавка Алтая."/>
